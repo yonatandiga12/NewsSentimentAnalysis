@@ -1,2 +1,4 @@
 # .gitignore
 .env
+.session
+/session_name.session
