@@ -104,6 +104,9 @@ async def fetch_messages_in_range(link: str, start_date_str: str, end_date_str: 
                 if not message.message:
                     continue
 
+                if len(message.message) > 500:
+                    continue
+
                 msg_date_local = message.date.astimezone(ISRAEL_TZ)
 
                 # Stop early if we’ve gone before the start
