@@ -3,7 +3,8 @@ from datetime import datetime
 
 from tqdm import tqdm
 
-from NewsSentimentAnalysis.SentimentModels import enrich_messages_dict_with_sentiment
+from NewsSentimentAnalysis.SentimentModels import enrich_messages_dict_with_sentiment, getSecondModelPredictions, \
+    compareTwoModels
 from NewsSentimentAnalysis.save_to_db import save_news_to_db, get_last_saved_time, getNewsFromDBInDates
 from NewsSentimentAnalysis.scrapeNews import NEWS_CHANNELS_TELEGRAM, fetch_messages, date_range, fetch_messages_in_range
 
@@ -66,12 +67,17 @@ if __name__ == '__main__':
 
     # #Get data from all sites
     for i in range(len(NEWS_CHANNELS_TELEGRAM)):
-        getDataFromSeveralDates(i)
+        print(NEWS_CHANNELS_TELEGRAM[i])
+        #getDataFromSeveralDates(i)
 
-    start_date = "18-06-2025"
-    end_date = "20-06-2025"
+    start_date = "24-06-2025"
+    end_date = "28-06-2025"
     news_items = getNewsFromDBInDates(start_date, end_date)
+    getSecondModelPredictions(news_items)
 
+
+    print('')
+    compareTwoModels(news_items)
     #analyze_sentiment_heBERT(news_items)
 
     # link = NEWS_CHANNELS_TELEGRAM[0]
